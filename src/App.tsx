@@ -1,15 +1,9 @@
-import { Text, Button, Stack } from "@mantine/core";
-import { ThemeProvider } from "./ThemeProvider";
+import { MantineProvider, Text } from '@mantine/core';
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <Stack align="center" mt={50}>
-        <Text size="xl" weight={500}>
-          Welcome to Mantine!
-        </Text>
-        <Button>Click the button</Button>
-      </Stack>
-    </ThemeProvider>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <Text>Welcome to Mantine!</Text>
+    </MantineProvider>
   );
 }
