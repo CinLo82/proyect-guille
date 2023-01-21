@@ -1,9 +1,34 @@
-import { MantineProvider, Text } from '@mantine/core';
+import {ColorSchemeProvider, MantineProvider, ColorScheme, Paper } from '@mantine/core';
+import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import AppShellExample from './components/AppShellExample';
 
-export default function App() {
+function App() {
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: 'mantine-color-scheme',
+    defaultValue: 'light',
+    getInitialValueInEffect: true,
+  });
+
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
+  useHotkeys([['mod+J', () => toggleColorScheme()]]);
+
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <Text>Welcome to Mantine!</Text>
-    </MantineProvider>
+    <div className='App'>
+        <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider theme={{colorScheme}}>
+        <Paper>
+        <AppShellExample />
+        </Paper>
+        </MantineProvider>
+        </ColorSchemeProvider>
+    </div>
   );
+
 }
+
+export default App;
+
+
+
