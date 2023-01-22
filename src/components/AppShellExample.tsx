@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom'
 import { useState } from 'react';
 import {
   AppShell,
@@ -13,75 +14,100 @@ import {
 import LightDarkModeButton from './LightDarkModeButton';
 import ChipsExample from './ChipsExample';
 import InputExample from './InputExample';
+import TextAndTitleExample from './TextAndTitleExample';
 
 function AppShellExample() {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
-    <AppShell
-      styles={{
-        main: {
-          background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-        },
-      }}
-      navbarOffsetBreakpoint="sm"
-      asideOffsetBreakpoint="sm"
-      navbar={
-        <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
+    <Router>
+        <AppShell
+          styles={{
+            main: {
+              background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+            },
+          }}
+          navbarOffsetBreakpoint="sm"
+          asideOffsetBreakpoint="sm"
+          navbar={
+            <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
 
-          <Navbar.Section>
-              <Text>Hello this is title</Text>
-          </Navbar.Section>
-          <Navbar.Section grow mt="lg">
-              <Text>Example 1</Text>
-              <Text>Example 2</Text>
-              <Text>Example 3</Text>
-              <Text>Example 4</Text>
-              <Text>Example 5</Text>
-          </Navbar.Section>
-          <Navbar.Section>
-              <Text>Footer</Text>
-          </Navbar.Section>
+              <Navbar.Section>
+                  <Text>Hello this is title</Text>
+              </Navbar.Section>
+              <Navbar.Section grow mt="lg">
+                <div style={{ display:"flex", flexDirection: "column" }} >
+                  <Text 
+                      component={ Link } 
+                      variant="link" 
+                      to="/" >Home Page
+                  </Text>
+                  <Text 
+                      component={ Link } 
+                      variant="link" 
+                      to="/input" >Input Page
+                  </Text>
+                  <Text 
+                      component={ Link } 
+                      variant="link" 
+                      to="/titlePage" >Title Page
+                  </Text>
+                 
+                </div>
+                 
+      
+              </Navbar.Section>
+              <Navbar.Section>
+                  <Text>Footer</Text>
+              </Navbar.Section>
+            </Navbar>
+          }
 
-
-        </Navbar>
-      }
-      aside={
-        <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-            <Text>Application sidebar</Text>
-          </Aside>
-        </MediaQuery>
-      }
-      footer={
-        <Footer height={60} p="md">
-          Application footer
-        </Footer>
-      }
-      header={
-        <Header height={{ base: 50, md: 70 }} p="md">
-          <div style={{ display: 'flex', justifyContent: "space-between"}}>
-            <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
-              <Burger
-                opened={opened}
-                onClick={() => setOpened((o) => !o)}
-                size="sm"
-                color={theme.colors.gray[6]}
-                mr="xl"
-              />
+          aside={
+            <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+              <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
+                <Text>Application sidebar</Text>
+              </Aside>
             </MediaQuery>
+          }
 
-            <Text>Application header</Text>
+          
+          footer={
 
-        <LightDarkModeButton />
+            <Footer height={60} p="md">
+              Application footer
+            </Footer>
+          }
 
-          </div>
-        </Header>
-      }
-    >
-      <ChipsExample />
-      <InputExample />
-    </AppShell>
+
+          header={
+            <Header height={{ base: 50, md: 70 }} p="md">
+              <div style={{ display: 'flex', justifyContent: "space-between"}}>
+                <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+                  <Burger
+                    opened={opened}
+                    onClick={() => setOpened((o) => !o)}
+                    size="sm"
+                    color={theme.colors.gray[6]}
+                    mr="xl"
+                  />
+                </MediaQuery>
+
+                <Text>Carrizo</Text>
+
+            <LightDarkModeButton />
+
+              </div>
+            </Header>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<ChipsExample />} />
+            <Route path="/input" element={<InputExample />} />
+            <Route path="/titlePage" element={<TextAndTitleExample />} />
+          </Routes>
+        </AppShell>
+    </Router>
   );
 }
 

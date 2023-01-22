@@ -17,6 +17,19 @@ function InputExample() {
           </Tooltip>
         }
         />
+
+      
+        <Input.Wrapper
+        id="input-demo"
+        withAsterisk
+        label="Credit card information"
+        description="Please enter your credit card information, we need some money"
+        error="Your credit card expired"
+        size="md"
+        >
+        <Input id="input-demo" placeholder="Your email" />
+        </Input.Wrapper>
+
       </div>
     );
   }
