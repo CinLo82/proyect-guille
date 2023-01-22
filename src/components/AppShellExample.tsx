@@ -15,6 +15,9 @@ import LightDarkModeButton from './LightDarkModeButton';
 import ChipsExample from './ChipsExample';
 import InputExample from './InputExample';
 import TextAndTitleExample from './TextAndTitleExample';
+import CalendarExample from './calendarExample';
+import TimeInputExample from './TimeInputExample';
+import NotificationExample from './NotificationExample';
 
 function AppShellExample() {
   const theme = useMantineTheme();
@@ -52,7 +55,21 @@ function AppShellExample() {
                       variant="link" 
                       to="/titlePage" >Title Page
                   </Text>
-                 
+                  <Text 
+                      component={ Link } 
+                      variant="link" 
+                      to="/calendarPage" >Calendar Page
+                  </Text>
+                  <Text 
+                      component={ Link } 
+                      variant="link" 
+                      to="/timeInputPage" >Time Input Page
+                  </Text>
+                  <Text 
+                      component={ Link } 
+                      variant="link" 
+                      to="/notificationPage" >Notification Page
+                  </Text>
                 </div>
                  
       
@@ -105,6 +122,11 @@ function AppShellExample() {
             <Route path="/" element={<ChipsExample />} />
             <Route path="/input" element={<InputExample />} />
             <Route path="/titlePage" element={<TextAndTitleExample />} />
+            <Route path="/calendarPage" element={<CalendarExample />} />
+            <Route path="/timeInputPage" element={<TimeInputExample />} />
+            <Route path="/notificationPage" element={<NotificationExample />} />
+
+
           </Routes>
         </AppShell>
     </Router>
